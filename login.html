@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Non Profit Organization</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-box {
+      background: #fff;
+      width: 350px;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #999;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    button:hover { background: #0056b3; }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-box">
+    <h2>Member Login</h2>
+
+    <form id="loginForm">
+      <label>Email:</label>
+      <input type="email" id="email" />
+      <span id="emailError" class="error"></span>
+
+      <label>Password:</label>
+     <input type="password" id="password" />
+      <span id="passwordError" class="error"></span>
+
+      <button type="button" onclick="validateLogin()">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function validateLogin() {
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("passwordError").textContent = "";
+
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
+      let isValid = true;
+
+      // Email
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (email === "") {
+        document.getElementById("emailError").textContent = "Email is required.";
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Invalid email format.";
+        isValid = false;
+      }
+
+      // Password
+      if (password === "") {
+        document.getElementById("passwordError").textContent =
+          "Password is required.";
+        isValid = false;
+      } else if (password.length < 6) {
+        document.getElementById("passwordError").textContent =
+          "Password must be at least 6 characters.";
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert("Login Successful!");
+        window.location.href = "index.html";
+      }
+    }
+  </script>
+</body>
+</html>
+
