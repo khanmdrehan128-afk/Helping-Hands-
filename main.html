@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Non-Profit Organization</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      animation: backgroundShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* BANNER */
+    .banner {
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    /* NAVBAR */
+    nav {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+    }
+    nav .logo {
+      color: #fff;
+      font-size: 24px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    nav ul li a:hover {
+      color: #f59e0b;
+      transform: translateY(-2px);
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: linear-gradient(90deg, #f59e0b, #10b981);
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO */
+    .hero {
+      height: 90vh;
+      background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      color: white;
+      text-align: center;
+      padding-top: 150px;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1509099836639-18ba1795216d') center/cover no-repeat;
+      opacity: 0.3;
+      z-index: -1;
+    }
+    .hero h1 {
+      font-size: 50px;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(245, 158, 11, 0.6);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(245, 158, 11, 0.6); }
+      to { text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 60px rgba(245, 158, 11, 0.8); }
+    }
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    .btn, .btn2 {
+      display: inline-block;
+      padding: 12px 25px;
+      margin-top: 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn {
+      background: linear-gradient(135deg, #3b82f6, #f59e0b);
+      color: white;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+    .btn2 {
+      background: linear-gradient(135deg, #10b981, #8b5cf6);
+      color: white;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+    .btn:hover, .btn2:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+    .btn::before, .btn2::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    .btn:hover::before, .btn2:hover::before {
+      left: 100%;
+    }
+
+    /* CONTENT SECTIONS */
+    .mission, .events, .donate, .volunteer {
+      padding: 60px 30px;
+      text-align: center;
+      position: relative;
+    }
+    .mission {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 255, 255, 0.9));
+      border-left: 5px solid #f59e0b;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+    }
+    .events {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(255, 255, 255, 0.9));
+      border-left: 5px solid #3b82f6;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    }
+    .donate {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(255, 255, 255, 0.9));
+      border-left: 5px solid #10b981;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+    .volunteer {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(255, 255, 255, 0.9));
+      border-left: 5px solid #8b5cf6;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+    }
+    .mission h2, .events h2, .donate h2, .volunteer h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #333;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mission Details */
+    .mission-details {
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .hidden {
+      display: none;
+    }
+
+    /* Cards */
+    .card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
+      width: 50%;
+      margin: 15px auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.1);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #10b981, #3b82f6, #f59e0b, #8b5cf6);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(59, 130, 246, 0.3);
+      border-color: #3b82f6;
+    }
+
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+    }
+    .modal-content {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.9));
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      width: 80%;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .login-modal-content {
+      max-width: 400px;
+      padding: 25px;
+    }
+    .login-box {
+      background: #fff;
+      width: 100%;
+      padding: 0;
+      border-radius: 10px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.2);
+    }
+    .login-box h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .login-box label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #999;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .login-box button:hover {
+      background: #0056b3;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+      display: block;
+      margin-top: -5px;
+      margin-bottom: 10px;
+    }
+    .login-btn {
+      background: linear-gradient(135deg, #f59e0b, #10b981);
+      padding: 8px 15px;
+      border-radius: 20px;
+      color: white !important;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    }
+    .close {
+      color: #8b5cf6;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .close:hover {
+      color: #f59e0b;
+      transform: scale(1.2);
+    }
+
+    /* Donation Progress */
+    .donation-progress {
+      margin: 20px 0;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #3b82f6);
+      width: 0%;
+      transition: width 0.5s ease;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+
+    /* Donate Buttons */
+    .donate-btn {
+      background: linear-gradient(135deg, #f59e0b, #10b981);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    }
+    .donate-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+    }
+
+    /* Custom Donation */
+    .custom-donation {
+      margin-top: 20px;
+    }
+    .custom-donation input {
+      padding: 10px;
+      border: 2px solid #3b82f6;
+      border-radius: 25px;
+      margin-right: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+    }
+    .custom-donation button {
+      background: linear-gradient(135deg, #8b5cf6, #f59e0b);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    }
+    .custom-donation button:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+    }
+
+    /* Volunteer Form */
+    .vol-form input, .vol-form select, .vol-form button {
+      width: 60%;
+      padding: 12px;
+      margin: 10px auto;
+      display: block;
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .vol-form input:focus, .vol-form select:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+      outline: none;
+    }
+    .vol-form button {
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    .vol-form button:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    }
+
+    /* Confirmation */
+    .confirmation {
+      margin-top: 20px;
+      padding: 15px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
+      border-radius: 8px;
+      animation: fadeIn 0.5s ease;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Dividers */
+    .mission::after, .events::after, .donate::after, .volunteer::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #3b82f6, #f59e0b, #8b5cf6);
+      border-radius: 2px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+      .card {
+        width: 90%;
+      }
+      nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        padding: 20px;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+      }
+      nav ul.show {
+        transform: translateY(0);
+      }
+      .mission, .events, .donate, .volunteer {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- BANNER -->
+  <div class="banner">
+    Non-Profit Organization
+  </div>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav>
+      <h2 class="logo">HelpingHands</h2>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#mission">Mission</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#donate">Donate</a></li>
+        <li><a href="#volunteer">Volunteer</a></li>
+        <li><a href="#" onclick="openLoginModal()" class="login-btn">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>Together We Can Make a Difference</h1>
+    <p>Join us in making the world a better place for everyone.</p>
+    <a href="donate.html" class="btn">Donate Now</a>
+    <a href="volunteer.html" class="btn2">Become a Volunteer</a>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission" class="mission">
+    <h2>Our Mission</h2>
+    <p>
+      Our non-profit organization is dedicated to helping those in need,
+      supporting education, healthcare, and environmental protection.
+    </p>
+    <div id="mission-details" class="mission-details hidden">
+      <p>We believe in creating sustainable change through community involvement and innovative solutions. Our programs focus on empowering individuals and fostering long-term partnerships for a better future.</p>
+    </div>
+    <button id="read-more-btn" class="btn">Read More</button>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events" class="events">
+    <h2>Upcoming Events</h2>
+    <div class="card">
+      <h3>Food Donation Drive</h3>
+      <p>Date: 21 January 2025</p>
+      <p>Location: City Community Center</p>
+      <button class="btn" onclick="openModal('food-drive')">Learn More</button>
+    </div>
+    <div class="card">
+      <h3>Tree Plantation Event</h3>
+      <p>Date: 10 February 2025</p>
+      <p>Location: Green Park</p>
+      <button class="btn" onclick="openModal('tree-plantation')">Learn More</button>
+    </div>
+  </section>
+
+
+  <!-- MODAL -->
+  <div id="event-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modal-title"></h3>
+      <p id="modal-date"></p>
+      <p id="modal-location"></p>
+
+      <p id="modal-description"></p>
+      <button class="btn" onclick="rsvp()">RSVP</button>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content login-modal-content">
+      <span class="close" onclick="closeLoginModal()">&times;</span>
+      <div class="login-box">
+        <h2>Member Login</h2>
+        <form id="loginForm">
+          <label>Email:</label>
+          <input type="email" id="login-email" />
+          <span id="login-emailError" class="error"></span>
+
+          <label>Password:</label>
+         <input type="password" id="login-password" />
+          <span id="login-passwordError" class="error"></span>
+
+          <button type="button" onclick="validateLogin()">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- DONATE -->
+  <section id="donate" class="donate">
+    <h2>Support Our Mission</h2>
+    <p>Your donation helps us change lives.</p>
+    <div class="donation-progress">
+      <p>Goal: ₹10,000</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <p id="current-amount">Current: ₹0</p>
+    </div>
+    <div class="donation-options">
+      <button class="donate-btn" onclick="donate(500)">Donate ₹500</button>
+      <button class="donate-btn" onclick="donate(1000)">Donate ₹1000</button>
+      <button class="donate-btn" onclick="donate(2000)">Donate ₹2000</button>
+    </div>
+    <div class="custom-donation">
+      <input type="number" id="custom-amount" placeholder="Custom Amount (₹)">
+      <button class="btn" onclick="donateCustom()">Donate Custom</button>
+    </div>
+  </section>
+
+  <!-- VOLUNTEER -->
+  <section id="volunteer" class="volunteer">
+    <h2>Become a Volunteer</h2>
+    <p>Fill the form and join our movement!</p>
+    <form class="vol-form" onsubmit="return validateVolunteerForm()">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="city" placeholder="City" required>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
